@@ -1,0 +1,190 @@
+const fetch = require('node-fetch');
+
+async function getFieldAvailability(roomID, startDate, endDate) {
+  const response = await fetch("http://ems.drexel.edu/ServerApi.aspx/GetLocationDetailsAvailability",
+    {"credentials":"include",
+    "headers":{"accept":"application/json, text/javascript, */*; q=0.01",
+    "accept-language":"en-US,en;q=0.9,fr;q=0.8",
+    "content-type":"application/json; charset=UTF-8",
+    "dea-csrftoken":"71ec1aab-37a5-45bc-a4dd-a87319836648",
+    "x-requested-with":"XMLHttpRequest"},
+    "referrer":"http://ems.drexel.edu/BrowseForSpace.aspx",
+    "referrerPolicy":"no-referrer-when-downgrade",
+    "body":`{\"roomId\":${roomID},\"start\":\"${startDate}T04:00:00.000Z\",\"end\":\"${endDate}T04:00:00.000Z\"}`,
+    "method":"POST","mode":"cors"
+  });
+  const json = await response.json();
+  // const json2 = json.d;
+  const { d } = json;
+  // const { Success, SuccessMessage } = d;
+  // const djs = JSON.parse(d);
+  // console.log(json);
+  const { JsonData:succes } =  JSON.parse(d);
+  // console.log(succes);
+
+  // const succes = djs.JsonData;
+  const { bookings } = JSON.parse(succes)
+  const one = (function todayActivities(data) {
+    // return data
+    let datas = [];
+    for (var i = 0; i < data.length; i++) {
+       let startActivity = bookings[i].Start.toString();
+       // return startActivity;
+      if (startActivity.includes(startDate)) {
+      datas.push(data[i]);
+      }
+      else {
+        break
+      }
+
+    }
+    return datas
+  })(bookings)
+  const datas = succes.bookings;
+
+
+  // console.log(one);
+  // const date = new Date();
+  // const test = dateGen(0);
+  // console.log(test);
+
+
+}
+
+// write a for loop that will check if the date is today and return the activities that meet that condition.
+
+
+
+// Generate date format depending on the amount of date we add.
+const dateGen = function formattedDate(amountOfDayToAdd, d = new Date){
+                  let month = String(d.getMonth() + 1);
+                  let day = String(d.getDate() + amountOfDayToAdd);
+                  const year = String(d.getFullYear());
+
+                  if (month.length < 2) month = '0' + month;
+                  if (day.length < 2) day = '0' + day;
+
+                  return `${year}-${month}-${day}`;
+                }
+
+
+
+// const startDate = "2019-03-19";
+//Current date.
+const startDate = dateGen(0);
+// const endDate = "2019-03-20";
+//Date of the next day.
+const endDate = dateGen(1);
+// Buckley Field ID
+const roomID = "2163";
+
+// const roomID = "2148"
+
+getFieldAvailability(roomID, startDate, endDate);
+
+let test = module.exports = { getFieldAvailability };
+
+
+
+
+
+
+
+
+
+
+const fetch = require('node-fetch');
+
+async function getFieldAvailability(roomID, startDate, endDate) {
+  let bookings1 = [];
+  fetch("http://ems.drexel.edu/ServerApi.aspx/GetLocationDetailsAvailability",
+    {"credentials":"include",
+    "headers":{"accept":"application/json, text/javascript, */*; q=0.01",
+    "accept-language":"en-US,en;q=0.9,fr;q=0.8",
+    "content-type":"application/json; charset=UTF-8",
+    "dea-csrftoken":"71ec1aab-37a5-45bc-a4dd-a87319836648",
+    "x-requested-with":"XMLHttpRequest"},
+    "referrer":"http://ems.drexel.edu/BrowseForSpace.aspx",
+    "referrerPolicy":"no-referrer-when-downgrade",
+    "body":`{\"roomId\":${roomID},\"start\":\"${startDate}T04:00:00.000Z\",\"end\":\"${endDate}T04:00:00.000Z\"}`,
+    "method":"POST","mode":"cors"
+  }).then(async function (response) {
+
+  const json = await response.json();
+  // const json2 = json.d;
+  const { d } = json;
+  // const { Success, SuccessMessage } = d;
+  const djs = JSON.parse(d);
+   // console.log();
+  const succes =  djs.JsonData;
+  // console.log(succes);
+
+  // const succes = djs.JsonData;
+  const { bookings } = JSON.parse(succes)
+  bookings1.push(bookings);
+  // console.log(bookings1);
+  const one = (function todayActivities(data) {
+    // return data
+    let datas = [];
+    for (var i = 0; i < data.length; i++) {
+       let startActivity = bookings[i].Start.toString();
+       // return startActivity;
+      if (startActivity.includes(startDate)) {
+      datas.push(data[i]);
+      }
+      else {
+        break
+      }
+
+    }
+    return datas
+  })(bookings)
+  // console.log(one);
+  // const datas = succes.bookings;
+})
+
+return bookings1;
+// console.log(bookings1);
+// return one
+
+  // console.log(one);
+  // const date = new Date();
+  // const test = dateGen(0);
+  // console.log(test);
+
+
+}
+
+// write a for loop that will check if the date is today and return the activities that meet that condition.
+
+
+
+// Generate date format depending on the amount of date we add.
+const dateGen = function formattedDate(amountOfDayToAdd, d = new Date){
+                  let month = String(d.getMonth() + 1);
+                  let day = String(d.getDate() + amountOfDayToAdd);
+                  const year = String(d.getFullYear());
+
+                  if (month.length < 2) month = '0' + month;
+                  if (day.length < 2) day = '0' + day;
+
+                  return `${year}-${month}-${day}`;
+                }
+
+
+
+// const startDate = "2019-03-19";
+//Current date.
+const startDate = dateGen(0);
+// const endDate = "2019-03-20";
+//Date of the next day.
+const endDate = dateGen(1);
+// Buckley Field ID
+const roomID = "2163";
+
+// const roomID = "2148"
+
+// const bookings2 = getFieldAvailability(roomID, startDate, endDate);
+console.log(bookings2);
+
+let test = module.exports = { getFieldAvailability };

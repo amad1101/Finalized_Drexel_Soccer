@@ -1,0 +1,39 @@
+{
+  "tomorow": [
+    {
+      "ReservationId": 164523,
+      "GmtStart": "2019-09-18T10:30:00",
+      "GmtEnd": "2019-09-18T11:30:00",
+      "Start": "2019-09-18T06:30:00",
+      "End": "2019-09-18T07:30:00",
+      "Title": "ROTC",
+      "Location": " - Buckley Recreational Field",
+      "Position": 390,
+      "Height": 60
+    },
+    {
+      "ReservationId": 188400,
+      "GmtStart": "2019-09-18T16:00:00",
+      "GmtEnd": "2019-09-18T17:30:00",
+      "Start": "2019-09-18T12:00:00",
+      "End": "2019-09-18T13:30:00",
+      "Title": "Air Force Birthday",
+      "Location": " - Buckley Recreational Field",
+      "Position": 720,
+      "Height": 90
+    }
+  ],
+  "today": [
+    {
+      "ReservationId": 188313,
+      "GmtStart": "2019-09-17T22:00:00",
+      "GmtEnd": "2019-09-18T00:00:00",
+      "Start": "2019-09-17T18:00:00",
+      "End": "2019-09-17T20:00:00",
+      "Title": "Men&#39;s Rugby Intro",
+      "Location": " - Buckley Recreational Field",
+      "Position": 1080,
+      "Height": 120
+    }
+  ]
+}
