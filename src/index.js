@@ -1,4 +1,4 @@
-const fetch = require('node-fetch');
+// const fetch = require('node-fetch');
 
 // Generate date format depending on the amount of date we add.
 const dateGen = function formattedDate(amountOfDayToAdd, d = new Date()){
@@ -26,25 +26,25 @@ console.log(endDate);
 
 
 // Send request to the drexel facility reservation system and get back a json data for Buckley Field.
-async function getFieldAvailability( startDate , endDate, roomID = "2163" ) {
-  const response = await fetch("http://ems.drexel.edu/ServerApi.aspx/GetLocationDetailsAvailability",
-    {"credentials":"include",
-    "headers":{"accept":"application/json, text/javascript, */*; q=0.01",
-    "accept-language":"en-US,en;q=0.9,fr;q=0.8",
-    "content-type":"application/json; charset=UTF-8",
-    "dea-csrftoken":"71ec1aab-37a5-45bc-a4dd-a87319836648",
-    "x-requested-with":"XMLHttpRequest"},
-    "referrer":"http://ems.drexel.edu/BrowseForSpace.aspx",
-    "referrerPolicy":"no-referrer-when-downgrade",
-    "body":`{\"roomId\":${roomID},\"start\":\"${startDate}T04:00:00.000Z\",\"end\":\"${endDate}T04:00:00.000Z\"}`,
-    "method":"POST","mode":"cors"
-  });
+// async function getFieldAvailability( startDate , endDate, roomID = "2163" ) {
+//   const response = await fetch("http://ems.drexel.edu/ServerApi.aspx/GetLocationDetailsAvailability",
+//     {"credentials":"include",
+//     "headers":{"accept":"application/json, text/javascript, */*; q=0.01",
+//     "accept-language":"en-US,en;q=0.9,fr;q=0.8",
+//     "content-type":"application/json; charset=UTF-8",
+//     "dea-csrftoken":"71ec1aab-37a5-45bc-a4dd-a87319836648",
+//     "x-requested-with":"XMLHttpRequest"},
+//     "referrer":"http://ems.drexel.edu/BrowseForSpace.aspx",
+//     "referrerPolicy":"no-referrer-when-downgrade",
+//     "body":`{\"roomId\":${roomID},\"start\":\"${startDate}T04:00:00.000Z\",\"end\":\"${endDate}T04:00:00.000Z\"}`,
+//     "method":"POST","mode":"cors"
+//   });
 
-  let jsons = await response.json();
+//   let jsons = await response.json();
 
-  const bookings = JSON.parse(JSON.parse(jsons.d).JsonData).bookings
-  return bookings;
-};
+//   const bookings = JSON.parse(JSON.parse(jsons.d).JsonData).bookings
+//   return bookings;
+// };
  
 // Helper Function that get two days events inputs and classify them depending on the day. output => today:[todayEvents], tomorrow:[tomorrowEvents].
 async function todayActivities(data) {
@@ -94,7 +94,7 @@ const roomID = "2163";
 // const roomID = "2148"
 
 module.exports = {
-  method: getFieldAvailability,
+  // method: getFieldAvailability,
   DateGen: dateGen,
   TodayActivities: todayActivities
 }
