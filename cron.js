@@ -4,7 +4,7 @@ const cron = require('node-cron');
 const { db } = require("./src/db")
 
 // update the db each hours
-cron.schedule(' * * * * *', async () => {
+cron.schedule(' 0 * * * *', async () => {
   
   const { DateTime } = require("luxon");
   date2 = DateTime.local().setZone('America/New_York').plus({ days: 1 }).toISODate();
